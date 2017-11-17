@@ -33,9 +33,9 @@ public class GameChar {
 			direction = "west";
 		}
 		else {
-			System.out.printf("Invalid direction: %s %n", direction);
+			//System.out.printf("Invalid direction: %s %n", direction);
 			//return false;
-			return "Invalid direction: " + direction + "\n";
+			return "You can't go that way.\n";
 		}
 		if (validMove) {
 			//System.out.printf("Moving %s... %n", direction);
@@ -45,7 +45,7 @@ public class GameChar {
 		else {
 			//System.out.printf("You can't go that far %s. %n", direction);
 			//return false;
-			return "You can't go that far " + direction + ". \n";
+			return "You can't go that far " + direction + ".\n";
 		}
 	}
 	

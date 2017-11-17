@@ -112,6 +112,7 @@ public class Adventure {
 	public String executeCommand(String cmdString) {
 		String outputString = "";
 		
+		cmdString = cmdString.toLowerCase();
 		String[] cmdArray = cmdString.split(" +");
 		String cmd = cmdArray[0];
         String cmdParam = "";
@@ -130,6 +131,7 @@ public class Adventure {
 	    		//System.out.println(item);
 	    		outputString += "\n" + item;
 	    	}
+	    	outputString += "\n";
 	    }
 	    else if (cmd.startsWith("q")) {   // Exit the program.
 	    	//System.out.println("Farewell");

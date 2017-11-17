@@ -1,11 +1,5 @@
-10 12
-~~~~....MMMM
-~~~....MMMM.
-~~...MMMMMMM
-~~~.MMMM*MMM
-~~~..MMMMMMM
-~~...fMMMMMM
-~~.ffffMMMMM
-~~..ffffff..
-~~~~fffffff.
-~~~~~~~fffff
+5 5
+~~~~.
+~~~..
+~~...
+~~~.M
