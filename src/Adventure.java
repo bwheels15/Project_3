@@ -8,18 +8,19 @@ public class Adventure {
 	private Map map;
 	private GameChar player;
 	private final int VISABILITY = 1;
+	boolean terrainOutputDisabled = false;
 	
 	public static void main(String[] args) {
-		//String inputFile = "test.txt";
-		String inputFile = "";
-		
-		//Get file name from command-line.
-		if (args.length < 1) {
-			System.out.println("No map file provided.");
-	    }
-	    else {
-	    	inputFile = args[0];
-	    }
+		String inputFile = "test.txt";
+//		String inputFile = "";
+//		
+//		//Get file name from command-line.
+//		if (args.length < 1) {
+//			System.out.println("No map file provided.");
+//	    }
+//	    else {
+//	    	inputFile = args[0];
+//	    }
 		
 		Adventure game = new Adventure(inputFile);
 		game.playGame();
@@ -58,6 +59,11 @@ public class Adventure {
 		player = new GameChar(map);
 	}
 	
+	public void disableMapOutput() {		// for testing purposes
+		map.disableOutput();
+		terrainOutputDisabled = true;
+	}
+	
 	public void playGame() {
 		// Create a Scanner object for file i/o.
 		Scanner input = new Scanner(System.in);
@@ -89,14 +95,15 @@ public class Adventure {
 	    input = new Scanner(System.in);
 		
 	    // Continue to prompt user for commands until "quit" is entered.
-		String playGame = "true";
-		while (!playGame.startsWith("Farewell\n")) {
+		String output = "";
+		while (!output.startsWith("Farewell\n")) {
 			// Prompt user to enter a command.
 	        System.out.print("Enter a command: ");
 	        String cmdString = input.nextLine().toLowerCase();
 
 	        // Execute the command.
-	        playGame = executeCommand(cmdString);
+	        output = executeCommand(cmdString);
+	        System.out.println(output);
 	    }
 		
 		input.close();
@@ -117,9 +124,11 @@ public class Adventure {
 	    	outputString = player.executeGoCommand(cmdParam);
 	    }
 	    else if (cmd.startsWith("i")) {   // Execute inventory command.
-	    	System.out.println("You are carrying:");
+	    	//System.out.println("You are carrying:");
+	    	outputString = "You are carrying:";
 	    	for(String item : player.inventory) {
-	    		System.out.println(item);
+	    		//System.out.println(item);
+	    		outputString += "\n" + item;
 	    	}
 	    }
 	    else if (cmd.startsWith("q")) {   // Exit the program.
@@ -134,7 +143,8 @@ public class Adventure {
 	    int x = player.getX();
 	    int y = player.getY();
 	    //System.out.printf("You are at location %d,%d in terrain %s \n", y, x, map.getTerrain(x,y));
-	    outputString += "You are at location " + y + "," + x + " in terrain " + map.getTerrain(x, y) + "\n";
+	    String inTerrain = terrainOutputDisabled ? "" : " in terrain" + map.getTerrain(x, y);
+	    outputString += "You are at location " + y + "," + x + inTerrain;
 	    
 	    map.surroundingTerrain(x,y, VISABILITY);
 	    

@@ -5,6 +5,7 @@ public class Map {
 	private int columns;
 	ArrayList<String> mapRows;
 	char[][] map;
+	boolean outputDisabled = false;
 	
 	public Map(String[] mapSize, ArrayList<String> mapTerrains) {
 		rows = Integer.parseInt(mapSize[0]);
@@ -23,6 +24,10 @@ public class Map {
 	    }
 	}
 	
+	public void disableOutput() {		// for testing purposes
+		outputDisabled = true;
+	}
+	
 	public char getTerrain(int x, int y) {
 		if (x < 0 || x >= columns || y < 0 || y >= rows) {
 			return 'X';
@@ -32,6 +37,8 @@ public class Map {
 	}
 	
 	public void surroundingTerrain(int x, int y, int vis) {
+		if (outputDisabled)
+			return;
 		for (int dy = -vis; dy <= vis; dy++) {
 			for (int dx = -vis; dx <= vis; dx++) {
 				System.out.printf("%s", getTerrain(x+dx,y+dy));

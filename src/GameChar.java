@@ -40,7 +40,7 @@ public class GameChar {
 		if (validMove) {
 			//System.out.printf("Moving %s... %n", direction);
 			//return true;
-			return "Moving " + direction + "... \n";
+			return "Moving " + direction + "...\n";
 		}
 		else {
 			//System.out.printf("You can't go that far %s. %n", direction);
