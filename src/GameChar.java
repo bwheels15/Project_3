@@ -13,7 +13,7 @@ public class GameChar {
 		inventory = new ArrayList<String>(Arrays.asList("brass lantern", "rope", "rations", "staff"));
 	}
 	
-	public boolean executeGoCommand(String cmdParam) {
+	public String executeGoCommand(String cmdParam) {
 		String direction = cmdParam;
 		boolean validMove = false;
 		if (direction.startsWith("n")) {
@@ -34,15 +34,18 @@ public class GameChar {
 		}
 		else {
 			System.out.printf("Invalid direction: %s %n", direction);
-			return false;
+			//return false;
+			return "Invalid direction: " + direction + "\n";
 		}
 		if (validMove) {
-			System.out.printf("Moving %s... %n", direction);
-			return true;
+			//System.out.printf("Moving %s... %n", direction);
+			//return true;
+			return "Moving " + direction + "... \n";
 		}
 		else {
-			System.out.printf("You can't go that far %s. %n", direction);
-			return false;
+			//System.out.printf("You can't go that far %s. %n", direction);
+			//return false;
+			return "You can't go that far " + direction + ". \n";
 		}
 	}
 	

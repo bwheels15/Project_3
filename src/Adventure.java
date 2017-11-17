@@ -89,32 +89,32 @@ public class Adventure {
 	    input = new Scanner(System.in);
 		
 	    // Continue to prompt user for commands until "quit" is entered.
-		boolean playGame = true;
-		while (playGame == true) {
+		String playGame = "true";
+		while (!playGame.startsWith("Farewell\n")) {
 			// Prompt user to enter a command.
 	        System.out.print("Enter a command: ");
 	        String cmdString = input.nextLine().toLowerCase();
-	        String[] cmdArray = cmdString.split(" +");
-	        
-	        String command = cmdArray[0];
-	        String commandParam = "";
-	        if (cmdArray.length == 2) {
-	        	commandParam = cmdArray[1];
-	        }
 
 	        // Execute the command.
-	        playGame = executeCommand(command, commandParam);
+	        playGame = executeCommand(cmdString);
 	    }
 		
 		input.close();
 	}
 	
-	private boolean executeCommand(String cmd, String cmdParam) {
-		boolean quiting = false;
+	public String executeCommand(String cmdString) {
+		String outputString = "";
+		
+		String[] cmdArray = cmdString.split(" +");
+		String cmd = cmdArray[0];
+        String cmdParam = "";
+        if (cmdArray.length == 2) {
+        	cmdParam = cmdArray[1];
+        }
 		
 		// Execute go command.
 	    if (cmd.startsWith("g")) {
-	    	player.executeGoCommand(cmdParam);
+	    	outputString = player.executeGoCommand(cmdParam);
 	    }
 	    else if (cmd.startsWith("i")) {   // Execute inventory command.
 	    	System.out.println("You are carrying:");
@@ -123,19 +123,21 @@ public class Adventure {
 	    	}
 	    }
 	    else if (cmd.startsWith("q")) {   // Exit the program.
-	    	System.out.println("Farewell");
-	    	quiting = true;
+	    	//System.out.println("Farewell");
+	    	outputString = "Farewell\n";
 	    }
 	    else {   // Display Error message.
-	    	System.out.printf("Invalid command: %s \n", cmd);
+	    	//System.out.printf("Invalid command: %s \n", cmd);
+	    	outputString = "Invalid command: " + cmd + "\n";
 	    }
 	    
 	    int x = player.getX();
 	    int y = player.getY();
-	    System.out.printf("You are at location %d,%d in terrain %s \n", y, x, map.getTerrain(x,y));
+	    //System.out.printf("You are at location %d,%d in terrain %s \n", y, x, map.getTerrain(x,y));
+	    outputString += "You are at location " + y + "," + x + " in terrain " + map.getTerrain(x, y) + "\n";
 	    
 	    map.surroundingTerrain(x,y, VISABILITY);
 	    
-	    return !quiting;
+	    return outputString;
 	}
 }
