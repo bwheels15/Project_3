@@ -1,3 +1,12 @@
+//------------------------------------------
+// Quiz 7
+//------------------------------------------
+// Group Members:
+//	Becca Wheelhouse
+//  Tyler Walke
+//  Josh Wallace
+//------------------------------------------
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
